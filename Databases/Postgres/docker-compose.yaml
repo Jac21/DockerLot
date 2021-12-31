@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:latest
+        restart: always
+        container_name: postgres
+        environment:
+            - PGDATA=/var/lib/postgresql/data/jac
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        logging:
+            options:
+                max-size: 5m
+                max-file: "2"
+        ports:
+            - '5438:5432'
+        volumes:
+            # copy the sql script to create tables
+            - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
