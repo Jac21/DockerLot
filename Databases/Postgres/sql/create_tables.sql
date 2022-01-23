@@ -5,10 +5,6 @@ CREATE TABLE IF NOT EXISTS product (
   PRIMARY KEY (product_id)
 );
 
-...
-
-...
-
 -- Creation of order_status table
 CREATE TABLE IF NOT EXISTS order_status (
   order_status_id varchar(200) NOT NULL,
@@ -23,5 +19,3 @@ CREATE TABLE IF NOT EXISTS order_status (
       FOREIGN KEY(status_name_id)
     REFERENCES status_name(status_name_id)
 );
-
-...
