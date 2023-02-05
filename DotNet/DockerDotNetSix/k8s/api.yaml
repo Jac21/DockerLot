@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dot-net-six-demo-api
+  labels: 
+    app: dot-net-six-demo-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dot-net-six-demo-api
+  template:
+    metadata:
+      labels:
+        app: dot-net-six-demo-api
+    spec:
+      containers:
+        - name: dot-net-six-demo-api
+          image: dot-net-six
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 128
+              memory: 256
+            limits:
+              memory: 256
+              cpu: 512
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dot-net-six-demo-api
+  labels:
+    app: dot-net-six-demo-api
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: dot-net-six-demo-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

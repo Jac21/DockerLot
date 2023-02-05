@@ -1,3 +1,4 @@
+using DockerDotNetSix.Checks;
 using DockerDotNetSix.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddHealthChecks()
+    .AddCheck<HealthCheck>("Basic");
+
 var app = builder.Build();
+
+app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
