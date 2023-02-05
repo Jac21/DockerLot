@@ -3,7 +3,7 @@
     <deployment type="dockerfile">
       <settings>
         <option name="imageTag" value="docker-dot-net-six" />
-        <option name="containerName" value="DotNetSix" />
+        <option name="containerName" value="dot-net-six" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
